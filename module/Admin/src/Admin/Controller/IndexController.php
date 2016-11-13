@@ -16,22 +16,25 @@ use Zend\Session\Container;
 
 class IndexController extends AbstractActionController {
     protected $authservice;
-    public function __construct($table) {
+    public function __construct($user) {
         $this->session = new Container('User');
+        $this->userObj = $user;
     }
-
+    
     public function indexAction() {
         
         $request = $this->getRequest();
         $view = new ViewModel();        
         if ($request->isPost()) {
-            $data = array();
+            $params = array();
             $data = $request->getPost();
-            $data['password'] = md5($data['password']);
-            $response = json_decode($this->userObj->userAuthenticate($data));
+            $params['password'] = md5($data['password']);
+            $params['username'] = $data['username'];
+            $method = 'loginuser';
+            $response = json_decode($this->userObj->userAuthenticate($params, $method));
             if ($response->status == 'success') {
                 $this->session->offsetSet('user', $response);
-                return $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'dashboard/add');
+                return $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'dashboard');
             } else {
                 $this->flashMessenger()->addMessage(array('error' => 'invalid credentials.'));
             }              
@@ -41,5 +44,10 @@ class IndexController extends AbstractActionController {
     public function loginAction() {
         $viewModel = new ViewModel();
         return $viewModel;
+    }
+    public function logoutAction()
+    {
+        $this->session->offsetUnset('user');
+        $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'index/login');
     }
 }
