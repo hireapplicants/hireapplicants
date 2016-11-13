@@ -38,7 +38,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
             $session = new Container('User');
             if ($session->offsetExists('user')) {
                 if (in_array($requestedResourse, $GLOBALS['PAGE_BEFORE_LOGIN'])) {
-                    $url = $GLOBALS['SITE_ADMIN_URL'] . 'dashboard/add';
+                    $url = $GLOBALS['SITE_ADMIN_URL'] . 'dashboard';
                     $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
                     $response->setStatusCode(302);
                 }
@@ -87,7 +87,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
         return array(
           'factories' =>array(
             'Admin\Controller\Index'=> function($sm){
-                $table = new \Admin\Model\UserTable();
+                $table = new \Admin\Model\User();
                 $indexObj = new \Admin\Controller\IndexController($table);
                 return $indexObj;
             }
