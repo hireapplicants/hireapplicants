@@ -7,9 +7,8 @@ class User {
         $this->cObj = new curl();
     }
     
-    public function userAuthenticate($data, $method, $controller='usercontroller') {
-        $action = isset($data['action'])?$data['action']:'';
-        $queryStr = http_build_query($data);
+    public function userAuthenticate($params, $method, $controller='usercontroller') {
+        $queryStr = http_build_query($params);
         $url = NODE_API.$controller.'/'.$method.'?'.$queryStr;
         return $this->cObj->callCurl($url);
     }

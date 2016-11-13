@@ -27,9 +27,9 @@ class IndexController extends AbstractActionController {
         $view = new ViewModel();        
         if ($request->isPost()) {
             $params = array();
-            $data = $request->getPost();
-            $params['password'] = md5($data['password']);
-            $params['username'] = $data['username'];
+            $inputParams = $request->getPost();
+            $params['password'] = md5($inputParams['password']);
+            $params['username'] = $inputParams['username'];
             $method = 'loginuser';
             $response = json_decode($this->userObj->userAuthenticate($params, $method));
             if ($response->status == 'success') {
