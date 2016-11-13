@@ -1,4 +1,5 @@
-<?php echo $this->doctype(); ?>
+<?php 
+echo $this->doctype(); ?>
 
 <html lang="en">
     <head>
@@ -36,10 +37,16 @@
                     <ul class="nav pull-right top-menu">
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
+                        <?php
+                            if(isset($GLOBALS['_SESSION']['User']->user->data)){
+                        ?>
                             <ul class="dropdown-menu">
                               <li><a href="#">Profile Setting</a></li>
-                              <li><a href="#">Logout</a></li>
+                              <li><a href="<?=$GLOBALS['SITE_ADMIN_URL']?>index/logout">Logout</a></li>
                             </ul>
+                        <?php
+                            }
+                        ?>
                         </li> 
                     </ul>
                 </div>    
