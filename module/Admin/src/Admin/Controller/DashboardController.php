@@ -30,6 +30,15 @@ class DashboardController extends AbstractActionController {
         }
         return $this->view;
     } 
+
+    public function statelistAction() {
+        $stateListResponse = $this->commonObj->curlhit('', 'getstatelist');
+        $stateList = json_decode($stateListResponse, true);
+        if($stateList['status']){
+            $this->view->stateList = $stateList['data'];
+        }
+        return $this->view;
+    }
     
     public function indexAction() {
         return $this->view;
