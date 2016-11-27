@@ -44,7 +44,7 @@ function trimStr(value) {
 
 function validateFormData(formId) {
     var element, fun;
-    var fields = $("#" + formId).serializeArray();
+    var fields= $("#" + formId).serializeArray();
     errorFlag = false;
     $.each(fields, function (i, field) {
         element = "#" + field.name;
@@ -59,4 +59,4 @@ function validateFormData(formId) {
     }
     alert(2);
     return true;
-}
+    }

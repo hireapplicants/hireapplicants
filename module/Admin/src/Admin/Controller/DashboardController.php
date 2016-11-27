@@ -43,4 +43,31 @@ class DashboardController extends AbstractActionController {
     public function indexAction() {
         return $this->view;
     }    
+        
+    public function priceAction() {
+        return $this->view;
+    } 
+        
+    public function pricesaveAction() 
+            {
+    $request = $this->getRequest()->getPost();
+    $params = array();
+$params["monthly_service"] = $request["monthly_service"];
+$params["phone_number"] = $request["phone_number"]; 
+$params["sms_pack_price"] =$request["sms_pack_price"];
+$params["nbr_of_sms_in_pack"] = $request["nbr_of_sms_in_pack"]; 
+$params["free_sms"] = $request["free_sms"]; 
+$SavePrice = $this->commonObj->curlhit($params, 'pricesave');
+
+
+$priceListResponse = $this->commonObj->curlhit('', 'getpricelist');
+        $priceList = json_decode($priceListResponse, true);
+        if($priceList['status']){
+            $this->view->priceList = $priceList['data'];
+        }
+   print_r($SavePrice);
+  return $this->view;
+      
+    } 
+
 }
