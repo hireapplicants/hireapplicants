@@ -18,4 +18,40 @@ class IndexController extends AbstractActionController
     {
         return new ViewModel();
     }
+    public function aboutusAction()
+    {
+        return new ViewModel();
+    }
+     public function servicesAction()
+    {
+        return new ViewModel();
+    }
+     public function pricingAction()
+    {
+        return new ViewModel();
+    }
+    public function faqAction()
+    {
+        return new ViewModel();
+    }
+    public function signupAction()
+    {
+        return new ViewModel();
+    }
+    public function signinAction()
+    {
+        return new ViewModel();
+    }
+    public function forgetpasswordAction()
+    {
+        return new ViewModel();
+    }
+    public function contactusAction()
+    {
+        return new ViewModel();
+    }
+    public function pagenotfoundAction()
+    {
+        return new ViewModel();
+    }
 }
