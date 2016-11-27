@@ -26,38 +26,18 @@ echo $this->doctype(); ?>
         ; ?>
 
     </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top" id="header">
-            <div class="navbar-inner">
-                <div class="container-fluid container">
-                    <div class="pull-left">
-                        <a class="brand" href="javascript:void(0);">
-                        </a>                    
-                    </div>
-                    <ul class="nav pull-right top-menu">
-                        <li class="dropdown">
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Dropdown <b class="caret"></b></a>
-                        <?php
-                            if(isset($GLOBALS['_SESSION']['User']->user->data)){
-                        ?>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Profile Setting</a></li>
-                              <li><a href="<?=$GLOBALS['SITE_ADMIN_URL']?>index/logout">Logout</a></li>
-                            </ul>
-                        <?php
-                            }
-                        ?>
-                        </li> 
-                    </ul>
-                </div>    
-            </div>
-        </div>  
-        <div class="container body_container">
+   
+    <?php
+    echo $this->partial('layout/companylayout/header');
+    ?>
+    
+        
+        
             <?php echo $this->content; ?>
-            <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
-            </footer>        
-        </div> <!-- /container -->            
+            <?php
+    echo $this->partial('layout/companylayout/footer');
+    ?>        
+               
         <?php echo $this->inlineScript() ?>
-    </body>
+ 
 </html>
