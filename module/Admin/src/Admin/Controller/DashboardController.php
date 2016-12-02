@@ -69,5 +69,13 @@ $params["sms_pack_price"] =$request["sms_pack_price"];
         return $this->view;
       
     }
+    public function companyAction(){
+        $request = $this->getRequest()->getQuery();
+        $params = array();
+        $params["status"] = isset($request["status"])?$request["status"]:'';        
+        $newcompanylist = $this->commonObj->curlhit($params, 'getcompanylist');
+        echo $newcompanylist;
+        exit();
+    }
 
 }

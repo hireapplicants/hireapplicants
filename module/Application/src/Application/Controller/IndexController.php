@@ -58,6 +58,11 @@ class IndexController extends AbstractActionController
         $params['contact_via'] = $request['contact_via'];
         $inputParams['parameters'] = json_encode($params);
         $response = $this->commonObj->curlhit($inputParams, 'addcompany');
+        $response = json_decode($response, true);
+        if($response['status'] == true){
+            $this->flashMessenger()->addMessage('Thank you for your registration, We will contact you soon!');
+            return $this->redirect()->toRoute('application');
+        }
         echo $response;die;
     }    
     public function aboutusAction()
