@@ -1,0 +1,33 @@
+<html>
+    <body ng-app="emailSetup" >
+        <div align="center" ng-controller="emailSetupListController" ng-init="getEmailTemplateList()">
+            <a  href="<?=$GLOBALS['SITE_ADMIN_URL']?>dashboard/emailsetup" style="color:green">New Email Setup</a><br>
+            <div>
+                <table align="center" cellpadding="6" border="1px">
+                    <tr>
+                        <th>Sno.</th>
+                        <th>Email Type</th>
+                        <th>Nick Name</th>
+                        <th>Subject</th>
+                        <th>CC Mail</th>
+                        <th>BCC mail</th>
+                        <th>Action</th>
+                    </tr>
+                    <tr ng-repeat="dataList in templateList" class="templateList">
+                        <td>{{index+1}}</td>
+                        <td>{{dataList.type}}</td>
+                        <td>{{dataList.nick_name}}</td>
+                        <td>{{dataList.subject}}</td>
+                        <td>{{dataList.cc_mail}}</td>
+                        <td>{{dataList.bcc_mail}}</td>
+                        <td>
+                            <span ng-click="editEmailTemplate(dataList.id)">Edit /</span>
+                            <span ng-click="deleteEmailTemplate(dataList.id)" style="color:red">Delete</span>
+                        </td>
+                    </tr>
+            </table>
+            </div>
+        </div>
+        <script src="/hireapplicants/public/js/email/emailsetup.js"></script>
+    </body>
+</html>

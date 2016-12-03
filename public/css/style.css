@@ -60,3 +60,9 @@ div.container a.brand {
     width:225px;
     background: #33cccc;
 }
+td{
+    font-weight: bold;
+}
+.templateList{
+    color:green;
+}

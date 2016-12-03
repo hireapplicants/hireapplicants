@@ -54,7 +54,7 @@ class DashboardController extends AbstractActionController {
         $params = array();
         $params["monthly_service"] = $request["monthly_service"];
         $params["phone_number_charge"] = $request["phone_number"];
-$params["sms_pack_price"] =$request["sms_pack_price"];
+        $params["sms_pack_price"] =$request["sms_pack_price"];
         $params["nbr_of_sms_in_pack"] = $request["nbr_of_sms_in_pack"];
         $params["free_sms"] = $request["free_sms"];
         $inputParams['parameters'] = json_encode($params);
@@ -76,6 +76,34 @@ $params["sms_pack_price"] =$request["sms_pack_price"];
         $newcompanylist = $this->commonObj->curlhit($params, 'getcompanylist');
         echo $newcompanylist;
         exit();
+    }
+
+
+    public function emailsetupAction() {
+        return $this->view;
+    }
+    public function emailsetuplistAction() {
+        return $this->view;
+    }
+    public function saveemaildataAction(){
+        $request = (array)$this->getRequest()->getPost();
+        echo $saveEmail = $this->commonObj->curlhit($request, 'saveemailtemplate');
+        exit;
+    }
+    public function gettemplatelistAction(){
+        echo $saveEmail = $this->commonObj->curlhit('', 'gettemplatelist');
+        exit;
+    }
+    
+    public function deleteEmailTemplateAction(){
+        $request = (array)$this->getRequest()->getPost();
+        echo $saveEmail = $this->commonObj->curlhit($request, 'deleteEmailTemplate');
+        exit;
+    }
+    public function editEmailTemplateAction(){
+        $request = (array)$this->getRequest()->getPost();
+        echo $saveEmail = $this->commonObj->curlhit($request, 'editEmailTemplate');
+        exit;
     }
 
 }
