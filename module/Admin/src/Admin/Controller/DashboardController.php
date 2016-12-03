@@ -17,6 +17,7 @@ use Admin\Model\common;
 
 class DashboardController extends AbstractActionController {
     public function __construct() {
+        $this->layout('layout/admin');
         $this->view =  new ViewModel();
         $this->session = new Container('User');
         $this->commonObj = new common();     
@@ -89,9 +90,11 @@ class DashboardController extends AbstractActionController {
 
 
     public function emailsetupAction() {
+        $this->layout('layout/admin');
         return $this->view;
     }
     public function emailsetuplistAction() {
+        $this->layout('layout/admin');
         return $this->view;
     }
     public function saveemaildataAction(){

@@ -14,6 +14,7 @@ app.controller('emailSetupController',function($scope,$timeout,$http){
     }
     
     $scope.emailSumbit = function(){
+        alert('dsfdsf');
         if($scope.mailType == undefined){
             $scope.errCode = 'Please Select one type .';
             $scope.errorMsg = true;

@@ -16,20 +16,21 @@ echo $this->doctype(); ?>
 
         <!-- Scripts -->
         <?php echo $this->headScript()
-            ->prependFile($this->basePath().'/public/js/validate.js') 
+            ->prependFile($this->basePath().'/public/js/validate.js')
+            ->prependFile($this->basePath().'/public/js/angular.min.js')
         ; ?>
 
     </head>
    
     <?php
-    //echo $this->partial('layout/companylayout/header');
+    echo $this->partial('layout/adminlayout/header');
     ?>
     
         
         
             <?php echo $this->content; ?>
             <?php
-    //echo $this->partial('layout/companylayout/footer');
+    echo $this->partial('layout/adminlayout/footer');
     ?>        
                
         <?php echo $this->inlineScript() ?>
