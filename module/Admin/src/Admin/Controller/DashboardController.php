@@ -19,7 +19,7 @@ class DashboardController extends AbstractActionController {
     public function __construct() {
         $this->view =  new ViewModel();
         $this->session = new Container('User');
-        $this->commonObj = new common();
+        $this->commonObj = new common();     
     }
 
     public function countrylistAction() {
@@ -40,7 +40,8 @@ class DashboardController extends AbstractActionController {
         return $this->view;
     }
 
-    public function indexAction() {
+    public function indexAction() {        
+        $this->layout('layout/admin');
         return $this->view;
     }
 
@@ -77,6 +78,14 @@ class DashboardController extends AbstractActionController {
         echo $newcompanylist;
         exit();
     }
+    public function activateordeactivatecompanyAction(){
+        $request = $this->getRequest()->getQuery();
+        $params = array();
+        $params["company_id"] = $request["company_id"];        
+        $response = $this->commonObj->curlhit($params, 'activateordeactivatecompany');
+        echo $response;
+        exit();
+    }    
 
 
     public function emailsetupAction() {

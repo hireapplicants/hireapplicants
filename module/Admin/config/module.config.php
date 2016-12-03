@@ -42,5 +42,8 @@
          'template_path_stack' => array(
              __DIR__ . '/../../../public/view',
          ),
+        'template_map' => array(
+            'layout/admin'           => __DIR__ . '/../../../public/view/layout/admin.phtml',
+        ),         
      ),
  );
