@@ -11,6 +11,7 @@
 namespace Admin;
 
 use Zend\Session\Container;
+use Zend\ModuleManager\ModuleManager;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Authentication\AuthenticationService;
@@ -30,8 +31,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
     function boforeDispatch(MvcEvent $event) {
         include 'config/constant.php';
         $response = $event->getResponse();
+        $config = $event->getApplication()->getServiceManager()->get('Config');
         $controller = $event->getRouteMatch()->getParam('controller');
         $module_array = explode("\\", $controller);
+        $viewModel = $event->getViewModel();
+        //echo $config['view_manager']['template_map']['layout/'.$module_array[2]];die;
+        if(isset($config['view_manager']['template_map']['layout/'.$module_array[2]]) && file_exists($config['view_manager']['template_map']['layout/'.$module_array[2]])){
+            $viewModel->setTemplate('layout/'.$module_array[2]);        
+        }
         if ($module_array[0] == 'Admin') {
             $action = $event->getRouteMatch()->getParam('action');
             $requestedResourse = $controller . "\\" . $action;
@@ -52,7 +59,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
             }
         }
     }
-
+/*    public function init(ModuleManager $manager)
+    {
+        $events = $manager->getEventManager();     
+        $sharedEvents = $events->getSharedManager();
+        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+            $controller = $e->getTarget();
+            //$controller->layout('layout/admin');
+            $controllerPathArr = explode("\\", get_class($controller));
+            $controller->layout('layout/'.$controllerPathArr[2]);
+        }, 100);
+    }
+ * 
+ */
     public function getAutoloaderConfig() {
         //echo __DIR__ . '/autoload_classmap.php';die;
         return array(

@@ -43,7 +43,7 @@
              __DIR__ . '/../../../public/view',
          ),
         'template_map' => array(
-            'layout/admin'           => __DIR__ . '/../../../public/view/layout/admin.phtml',
+            'layout/Dashboard'           => __DIR__ . '/../../../public/view/layout/admin.phtml',
         ),         
      ),
  );
