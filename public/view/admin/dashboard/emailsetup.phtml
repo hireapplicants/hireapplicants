@@ -43,7 +43,7 @@
                 <tr>
                 <td>Body</td>    
                 <td>
-                    <textarea class="col-md-10" ng-model="bodymsg"  id="articleContent">
+                    <textarea class="col-md-10" ng-model="bodymsg"  id="articleContent" name="articleContent">
                         
                     </textarea>
                 </td>
@@ -62,8 +62,8 @@
     </body>    
 </html>
     <script src="/hireapplicants/public/js/email/emailsetup.js"></script>  
-    <script type="text/javascript" src="/hireapplicants/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="/hireapplicants/public/js/ckeditor/ckeditor.js"></script>
     <script type="text/javascript">
-       // CKEDITOR.replace( 'articleContent' );
+        CKEDITOR.replace( 'articleContent' );
     </script> 
         
