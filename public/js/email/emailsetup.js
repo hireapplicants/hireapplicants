@@ -1,6 +1,6 @@
 var editData ;
 var app = angular.module('emailSetup',[]);
-app.controller('emailSetupController',function($scope,$timeout,$http){
+app.controller('emailSetupController',function($scope,$timeout,$http,$sce){
     $scope.mailType = '';
     console.log(editData);
     $scope.emailDataArr = {};
@@ -14,7 +14,7 @@ app.controller('emailSetupController',function($scope,$timeout,$http){
     }
     
     $scope.emailSumbit = function(){
-        alert('dsfdsf');
+        var editorText = CKEDITOR.instances.articleContent.getData();
         if($scope.mailType == undefined){
             $scope.errCode = 'Please Select one type .';
             $scope.errorMsg = true;
@@ -52,7 +52,7 @@ app.controller('emailSetupController',function($scope,$timeout,$http){
         $scope.emailDataArr.subject = $scope.subject;
         $scope.emailDataArr.cc_mail = $scope.ccMail;
         $scope.emailDataArr.bcc_mail = $scope.bccMail;
-        $scope.emailDataArr.body_msg = $scope.bodymsg;
+        $scope.emailDataArr.body_msg = editorText;
         if(!$scope.hitApi){
             $http({
                 method:'POST',
@@ -113,19 +113,12 @@ app.controller('emailSetupListController',function($scope,$http,$window){
         $scope.emailTemplateid = {'id':template_id};
         $http({
                 method:'POST',
-                url : serverUrl+'dashboard/editEmailTemplate',
+                url : serverUrl+'dashboard/emailsetup?'+template_id,
                 data : jQuery.param($scope.emailTemplateid),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function(response){
-                if(response.status){
-                    $window.location.href = serverUrl+'dashboard/emailsetup';
-                    $scope.successMsg = true;
-                    editData = response.data ;
-                    console.log(editData);
-                }else{
-                    $scope.errorMsg = true;
-                    $scope.errCode = response.msg;
-                }  
+                $scope.data = $sce.trustAsHtml(response);
+                console.log(responsess);  
             });
     }    
 
