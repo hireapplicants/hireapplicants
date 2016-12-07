@@ -30,12 +30,5 @@ mainApp.controller('signup', function($scope, $http){
         }).error(function() {
             $scope.status = status;
         });
-    }        
+    };
 });
-function ObjecttoParams(obj) {
-    var p = [];
-    for (var key in obj) {
-        p.push(key + '=' + encodeURIComponent(obj[key]));
-    }
-    return p.join('&');
-};

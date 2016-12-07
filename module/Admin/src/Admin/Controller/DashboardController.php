@@ -69,7 +69,11 @@ class DashboardController extends AbstractActionController {
         return $this->view;
       
     }
-    public function companyAction(){
+    public function newcompanylistAction(){
+        return $this->view;
+    }
+
+    public function companylistAction(){
         $request = $this->getRequest()->getQuery();
         $params = array();
         $params["status"] = isset($request["status"])?$request["status"]:'';        
@@ -78,9 +82,11 @@ class DashboardController extends AbstractActionController {
         exit();
     }
     public function activateordeactivatecompanyAction(){
-        $request = $this->getRequest()->getQuery();
+        $request = $this->getRequest()->getPost();
         $params = array();
-        $params["company_id"] = $request["company_id"];        
+        $params['company_id'] = $request["company_id"]; 
+        $params['status'] = $request["status"];
+        $params['activate_by'] = $this->session['user']->data[0]->id;
         $response = $this->commonObj->curlhit($params, 'activateordeactivatecompany');
         echo $response;
         exit();
