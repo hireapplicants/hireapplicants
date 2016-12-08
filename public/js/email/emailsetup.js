@@ -117,8 +117,7 @@ app.controller('emailSetupListController',function($scope,$http,$window){
                 data : jQuery.param($scope.emailTemplateid),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function(response){
-                $scope.data = $sce.trustAsHtml(response);
-                console.log(responsess);  
+                alert(response);
             });
     }    
 
