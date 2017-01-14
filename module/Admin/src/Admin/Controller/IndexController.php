@@ -13,9 +13,10 @@ namespace Admin\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
-
+use Admin\Model\common;
 class IndexController extends AbstractActionController {
     protected $authservice;
+    public $session;
     public function __construct($user) {
         $this->session = new Container('User');
         $this->userObj = $user;
@@ -34,6 +35,7 @@ class IndexController extends AbstractActionController {
             $response = json_decode($this->userObj->userAuthenticate($params, $method));
             if ($response->status == 'success') {
                 $this->session->offsetSet('user', $response);
+                $this->session['userDetail'] = $response;
                 return $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'dashboard');
             } else {
                 $this->flashMessenger()->addMessage(array('error' => 'invalid credentials.'));
@@ -48,6 +50,7 @@ class IndexController extends AbstractActionController {
     public function logoutAction()
     {
         $this->session->offsetUnset('user');
+        unset($this->session['userDetail']);
         $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'index/login');
-    }
+    }    
 }

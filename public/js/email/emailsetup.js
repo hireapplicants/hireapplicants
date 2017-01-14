@@ -8,7 +8,7 @@ app.controller('emailSetupController',function($scope,$timeout,$http,$sce){
     $scope.errCode = '';
     $scope.successMsg = false;
     $scope.hitApi = 0;
-    $scope.typeArr = [{'id':'manual','name':'Manual'},{'id':'7_day_reminder','name':'7 Day Reminder'},{'id':'5_day_reminder','name':'5 Day Reminder'},{'id':'3_day_reminder','name':'3 Day Reminder'},{'id':'final_call','name':'Final Call'}];
+    $scope.typeArr = [{'id':'send_activation_link_to_admin','name':'Send Activation Link To Admin'},{'id':'manual','name':'Manual'},{'id':'7_day_reminder','name':'7 Day Reminder'},{'id':'5_day_reminder','name':'5 Day Reminder'},{'id':'3_day_reminder','name':'3 Day Reminder'},{'id':'final_call','name':'Final Call'}];
     $scope.changeMailtype = function(){
         $scope.subject = $scope.mailType;
     }

@@ -65,6 +65,36 @@ class IndexController extends AbstractActionController
         }
         echo $response;die;
     }    
+    public function updatecompanyAction() {
+        $request = $this->getRequest()->getQuery();
+        $params = array();
+        $params['user']['first_name'] = $request['name'];
+        $params['user']['password'] = md5($request['password']);
+        $params['company']['activation_code'] = $request['activation_code'];
+        $inputParams['parameters'] = json_encode($params);
+        $response = $this->commonObj->curlhit($inputParams, 'updatecompany');
+        $response = json_decode($response, true);
+        if($response['status'] == true){
+            $this->flashMessenger()->addMessage('Thank you for your registration, We will contact you soon!');
+            return $this->redirect()->toRoute('application');
+        }
+        echo json_encode($response);die;
+    }    
+    public function activateAction()
+    {
+        $request = $this->getRequest()->getQuery();
+        $params = array();
+        if(isset($request['code']) && !empty($request['code'])){
+            $params['activation_code'] = $request['code'];
+            $params['status'] = 1;
+            $companyDetailResponse = $this->commonObj->curlhit($params, 'getcompanylist', 'companycontroller');        
+            $companyDetail = json_decode($companyDetailResponse, true);
+            if($companyDetail['status']){
+                $this->view->companyDetail = $companyDetail['data'][0];
+            }
+        }
+        return $this->view;
+    }    
     public function aboutusAction()
     {
         return new ViewModel();
