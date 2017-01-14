@@ -86,7 +86,7 @@ class IndexController extends AbstractActionController
         $params = array();
         if(isset($request['code']) && !empty($request['code'])){
             $params['activation_code'] = $request['code'];
-            $params['status'] = 1;
+            $params['status'] = 0;
             $companyDetailResponse = $this->commonObj->curlhit($params, 'getcompanylist', 'companycontroller');        
             $companyDetail = json_decode($companyDetailResponse, true);
             if($companyDetail['status']){

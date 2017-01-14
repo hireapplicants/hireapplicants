@@ -11,6 +11,7 @@ class common{
             $queryStr = http_build_query($params);
         }
         $url = NODE_API.$controller.'/'.$method.'?'.$queryStr;
+        //echo $url;die;
         return $this->cObj->callCurl($url);
     }  
 }
