@@ -38,7 +38,7 @@ class DashboardController extends AbstractActionController {
             $this->view->stateList = $stateList['data'];
         }
         return $this->view;
-    }
+    } 
 
     public function indexAction() {      
         return $this->view;
@@ -76,9 +76,9 @@ class DashboardController extends AbstractActionController {
     public function companylistAction(){
         $request = $this->getRequest()->getQuery();
         $params = array();
-        $params["status"] = isset($request["status"])?$request["status"]:'';        
+        $params["status"] = isset($request["status"])?$request["status"]:'';  
         $newcompanylist = $this->commonObj->curlhit($params, 'getcompanylist');
-        echo $newcompanylist;
+        echo $newcompanylist;        
         exit();
     }
     public function activateordeactivatecompanyAction(){
@@ -118,6 +118,10 @@ class DashboardController extends AbstractActionController {
         $request = (array)$this->getRequest()->getPost();
         echo $saveEmail = $this->commonObj->curlhit($request, 'editEmailTemplate');
         exit;
+    }
+
+    public function addUserAction() {
+        return $this->view;
     }
 
 }

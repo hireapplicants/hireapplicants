@@ -122,7 +122,11 @@ body > section {
   text-align: center;
   padding-bottom: 55px;
 }
-
+/*company listing css*/
+.companylist>th{
+    text-align:center !important;
+};
+/*end*/
 .scaleIn {
   -webkit-animation-name: scaleIn;
   animation-name: scaleIn;
