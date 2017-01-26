@@ -63,7 +63,7 @@ class IndexController extends AbstractActionController
             $this->flashMessenger()->addMessage('Thank you for your registration, We will contact you soon!');
             return $this->redirect()->toRoute('application');
         }
-        echo $response;die;
+        echo json_encode($response);die;
     }    
     public function updatecompanyAction() {
         $request = $this->getRequest()->getQuery();
@@ -86,7 +86,7 @@ class IndexController extends AbstractActionController
         $params = array();
         if(isset($request['code']) && !empty($request['code'])){
             $params['activation_code'] = $request['code'];
-            $params['status'] = 0;
+            $params['status'] = 1;
             $companyDetailResponse = $this->commonObj->curlhit($params, 'getcompanylist', 'companycontroller');        
             $companyDetail = json_decode($companyDetailResponse, true);
             if($companyDetail['status']){
