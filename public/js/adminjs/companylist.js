@@ -32,7 +32,7 @@ app.controller('companyListController', function($scope, $http){
         }).success(function(response) {
             $scope.companyActivationParams = {};
             if(response.status==true){
-                $scope.company_list = response.data;
+                $scope.companylist();
             }else{
                 //to do
             }

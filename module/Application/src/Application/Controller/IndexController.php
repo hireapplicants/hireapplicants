@@ -76,7 +76,7 @@ class IndexController extends AbstractActionController
         $response = json_decode($response, true);
         if($response['status'] == true){
             $this->flashMessenger()->addMessage('Thank you for your registration, We will contact you soon!');
-            return $this->redirect()->toRoute('application');
+            return $this->redirect()->toRoute('admin');
         }
         echo json_encode($response);die;
     }    
