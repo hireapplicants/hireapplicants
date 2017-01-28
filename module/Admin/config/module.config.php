@@ -4,6 +4,7 @@
          'invokables' => array(
              //'Admin\Controller\Index' => 'Admin\Controller\IndexController',
              'Admin\Controller\Dashboard' => 'Admin\Controller\DashboardController',
+             'Admin\Controller\Common' => 'Admin\Controller\CommonController',
          ),
      ),
  'router' => array(
