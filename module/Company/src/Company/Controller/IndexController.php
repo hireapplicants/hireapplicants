@@ -8,7 +8,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Admin\Controller;
+namespace Company\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -32,8 +32,8 @@ class IndexController extends AbstractActionController {
             $params['password'] = md5($inputParams['password']);
             $params['username'] = $inputParams['username'];
             $method = 'loginuser';
-            $response = json_decode($this->userObj->userAuthenticate($params, $method), true);
-            if ($response['status'] == 'success') {
+            $response = json_decode($this->userObj->userAuthenticate($params, $method));
+            if ($response->status == 'success') {
                 $this->session->offsetSet('user', $response);
                 $this->session['userDetail'] = $response;
                 return $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'dashboard');

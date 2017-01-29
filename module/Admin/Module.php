@@ -39,15 +39,20 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
         if(isset($config['view_manager']['template_map']['layout/'.$module_array[2]]) && file_exists($config['view_manager']['template_map']['layout/'.$module_array[2]])){
             $viewModel->setTemplate('layout/'.$module_array[2]);        
         }
-        if ($module_array[0] == 'Admin') {
+        if ($module_array[0] == 'Admin' || $module_array[0]=='Company') {
             $action = $event->getRouteMatch()->getParam('action');
             $requestedResourse = $controller . "\\" . $action;
-            $session = new Container('User');
+            $session = new Container('User');;
             if ($session->offsetExists('user')) {
                 if (in_array($requestedResourse, $GLOBALS['PAGE_BEFORE_LOGIN'])) {
                     $url = $GLOBALS['SITE_ADMIN_URL'] . 'dashboard';
                     $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
                     $response->setStatusCode(302);
+                }
+                if($module_array[0]=='Company'){
+                   if(in_array(2, $session->userDetail['userRoleList'])){
+                       echo "You are not allowed to access module";die;
+                   } 
                 }
             } else {
                 if ($requestedResourse != 'Admin\Controller\Index\index' && !in_array($requestedResourse, $GLOBALS['PAGE_BEFORE_LOGIN'])) {
