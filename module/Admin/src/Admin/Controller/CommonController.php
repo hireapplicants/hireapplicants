@@ -26,7 +26,7 @@ class CommonController extends AbstractActionController {
     
     public function userlistAction() {
         
-        $request = $this->getRequest();
+        $request = $this->getRequest()->getQuery();
         $view = new ViewModel(); 
         if(isset($request["company_id"]) || isset($request["user_id"])){
             if(isset($request["company_id"])){
@@ -45,8 +45,19 @@ class CommonController extends AbstractActionController {
         }
         
         $method = 'getUserDetails';
-        $response = json_decode($this->commonObj->curlhit($params,$method,'usercontroller'));
+        $response = $this->commonObj->curlhit($params,$method,'usercontroller');
         print_r($response);die;
     }
-       
+    
+    public function deleteuserAction() {
+        
+        $request = $this->getRequest()->getQuery();
+        $view = new ViewModel(); 
+        $params['id'] = $request["user_id"];
+        $method = 'deleteUser';
+        $response = $this->commonObj->curlhit($params,$method,'usercontroller');
+        print_r($response);die;
+    }
+     
+    
 }
