@@ -58,6 +58,11 @@ class CommonController extends AbstractActionController {
         $response = $this->commonObj->curlhit($params,$method,'usercontroller');
         print_r($response);die;
     }
-     
+    public function logoutAction()
+    {
+        $this->session->offsetUnset('user');
+        unset($this->session['userDetail']);
+        $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'index/login');
+    }      
     
 }
