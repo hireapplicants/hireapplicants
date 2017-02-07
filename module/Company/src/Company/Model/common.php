@@ -1,5 +1,5 @@
 <?php
-namespace Admin\Model;
+namespace Company\Model;
 
 class common{
     public function __construct() {
