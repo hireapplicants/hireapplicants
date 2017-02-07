@@ -13,7 +13,7 @@ namespace Company\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Zend\Session\Container;
-use Admin\Model\common;
+use Company\Model\common;
 
 class DashboardController extends AbstractActionController {
     public function __construct() {
@@ -119,4 +119,14 @@ class DashboardController extends AbstractActionController {
         exit;
     }
 
+    public function purchagesubscriptionAction(){
+        return $this->view;
+    }
+    
+    public function getallservicedata() {
+        $request = (array)$this->getRequest()->getPost();
+        $saveEmail = $this->commonObj->curlhit($request, 'getServicelist');
+        print_r($saveEmail);
+        exit;
+    }
 }
