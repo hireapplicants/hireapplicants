@@ -63,6 +63,15 @@ class CommonController extends AbstractActionController {
         $this->session->offsetUnset('user');
         unset($this->session['userDetail']);
         $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'index/login');
-    }      
+    }  
+    public function servicelistAction(){
+        $params = array();
+        $method = 'getServicelist';
+        $params['user_id'] = $this->session['userDetail']['data'][0]['id'];
+        $params['company_id'] = $this->session['userDetail']['data'][0]['company_id'];
+        echo $response = $this->commonObj->curlhit($params,$method,'companycontroller');
+        exit();
+        
+    }
     
 }

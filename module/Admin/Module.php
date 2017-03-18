@@ -42,23 +42,25 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
         if ($module_array[0] == 'Admin' || $module_array[0]=='Company') {
             $action = $event->getRouteMatch()->getParam('action');
             $requestedResourse = $controller . "\\" . $action;
-            $session = new Container('User');
+            $session = new Container('User');            
             if ($session->offsetExists('user')) {
                 if (in_array($requestedResourse, $GLOBALS['PAGE_BEFORE_LOGIN'])) {
                     $url = $GLOBALS['SITE_ADMIN_URL'] . 'dashboard';
                     $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
                     $response->setStatusCode(302);
+                    $response->sendHeaders();
+                }else{
+                    if($module_array[0]=='Company'){
+                        if(!in_array(2, $session->userDetail['userRoleList'][$session->userDetail['data'][0]['id']])){
+                           echo "You are not allowed to access module";die;
+                        } 
+                    }
+                    if($module_array[0]=='Admin'){
+                       if(!in_array(1, $session->userDetail['userRoleList'][$session->userDetail['data'][0]['id']]) && $controller !='Admin\Controller\Common'){
+                           echo "You are not allowed to access module";die;
+                       } 
+                    }     
                 }
-                if($module_array[0]=='Company'){
-                   if(!in_array(2, $session->userDetail['userRoleList'][$session->userDetail['data'][0]['id']])){
-                       echo "You are not allowed to access module";die;
-                   } 
-                }
-                if($module_array[0]=='Admin'){
-                   if(!in_array(1, $session->userDetail['userRoleList'][$session->userDetail['data'][0]['id']]) && $controller !='Admin\Controller\Common'){
-                       echo "You are not allowed to access module";die;
-                   } 
-                }                
             } else {
                 if ($requestedResourse != 'Admin\Controller\Index\index' && !in_array($requestedResourse, $GLOBALS['PAGE_BEFORE_LOGIN'])) {
                     $url = $GLOBALS['SITE_ADMIN_URL'] . 'index/login';

@@ -47,10 +47,10 @@ class IndexController extends AbstractActionController {
         $viewModel = new ViewModel();
         return $viewModel;
     }
-    public function logoutAction()
+/*    public function logoutAction()
     {
         $this->session->offsetUnset('user');
         unset($this->session['userDetail']);
         $this->redirect()->toUrl($GLOBALS['SITE_ADMIN_URL'].'index/login');
-    }    
+    }    */
 }

@@ -48,8 +48,7 @@ class DashboardController extends AbstractActionController {
         return $this->view;
     }
 
-    public function pricesaveAction() 
-            {
+    public function pricesaveAction() {
         $request = $this->getRequest()->getPost();
         $params = array();
         $params["monthly_service"] = $request["monthly_service"];

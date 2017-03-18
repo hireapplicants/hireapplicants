@@ -41,6 +41,8 @@ class DashboardController extends AbstractActionController {
     }
 
     public function indexAction() {      
+        $this->view->subscription_validity = strtotime($this->session->userDetail['data'][0]['expire_validity']);
+        $this->view->current_time = time();        
         return $this->view;
     }
 
@@ -129,4 +131,7 @@ class DashboardController extends AbstractActionController {
         print_r($saveEmail);
         exit;
     }
+    public function packagelistAction() {
+        return $this->view;
+    }    
 }
