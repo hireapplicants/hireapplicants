@@ -18,7 +18,7 @@ app.controller('packagelistController', function ($scope, $http, $sce) {
         serviceToAddIntoCart.service_detail_id = service_detail_id;
         $http({
             method: 'POST',
-            data:ObjecttoParams(serviceToAddIntoCart),
+            data: ObjecttoParams(serviceToAddIntoCart),
             url: serverUrl + 'common/addtocart',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         }).success(function (response) {

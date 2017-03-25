@@ -133,5 +133,11 @@ class DashboardController extends AbstractActionController {
     }
     public function packagelistAction() {
         return $this->view;
-    }    
+    } 
+    public function cartAction() {
+        return $this->view;
+    } 
+     public function checkoutAction() {
+        return $this->view;
+    } 
 }
