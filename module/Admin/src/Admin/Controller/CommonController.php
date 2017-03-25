@@ -73,5 +73,15 @@ class CommonController extends AbstractActionController {
         exit();
         
     }
+    public function addtocartAction(){ 
+        $params = array();
+        $request = $this->getRequest()->getPost();
+        $params['user_id'] = $this->session['userDetail']['data'][0]['id'];
+        $params['company_id'] = $this->session['userDetail']['data'][0]['company_id'];        
+        $params['service_id'] = $request['service_id'];
+        $params['service_detail_id'] = $request['service_detail_id'];
+        
+        echo $response = $this->commonObj->curlhit($params,'addToCart','companycontroller');
+    }    
     
 }
