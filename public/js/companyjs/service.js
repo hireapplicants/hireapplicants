@@ -6,7 +6,7 @@ app.controller('packagelistController',function($scope,$http,$sce){
                 url : serverUrl+'common/servicelist',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             }).success(function(response){
-                console.log(response);
+                $scope.serviceList = response.data[0].service_id;
             });
    };
    $scope.getallservice();
