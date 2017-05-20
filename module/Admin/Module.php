@@ -45,7 +45,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface {
             $session = new Container('User');            
             if ($session->offsetExists('user')) {
                 if (in_array($requestedResourse, $GLOBALS['PAGE_BEFORE_LOGIN'])) {
-                    $url = $GLOBALS['SITE_ADMIN_URL'] . 'dashboard';
+                    if(in_array(2, $session->userDetail['userRoleList'][$session->userDetail['data'][0]['id']])){
+                        $url = $GLOBALS['SITE_COMPANY_URL'] . 'dashboard';
+                    }else{
+                        $url = $GLOBALS['SITE_ADMIN_URL'] . 'dashboard';
+                    }
                     $response->setHeaders($response->getHeaders()->addHeaderLine('Location', $url));
                     $response->setStatusCode(302);
                     $response->sendHeaders();
